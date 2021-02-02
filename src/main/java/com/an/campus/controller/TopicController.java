@@ -32,7 +32,7 @@ public class TopicController {
         if(topic.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }else{
-            return topic.get();
+             return topic.get();
         }
     }
     @GetMapping("/topic/{id}/comments")
