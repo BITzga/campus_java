@@ -18,6 +18,11 @@ public class Comment {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
     private List<Comment> subComments;
+
+    public Comment(String context) {
+        this.context = context;
+    }
+
     public void addComment(Comment comment){
         this.subComments.add(comment);
     }

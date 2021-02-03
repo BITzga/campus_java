@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Topic {
     @Id
     private BigInteger id;
-    private String ownerId;
+    private BigInteger ownerId;
     private List<String> imgUrl;
     private List<Comment> comments;
     private String title;
@@ -24,6 +24,19 @@ public class Topic {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
     private List<BigInteger> likeList;
+
+    public Topic(BigInteger id, BigInteger ownerId, List<String> imgUrl, List<Comment> comments, String title, String context, Integer views, Integer likes, Date sendDate, List<BigInteger> likeList) {
+        this.id = id;
+        this.ownerId = ownerId;
+        this.imgUrl = imgUrl;
+        this.comments = comments;
+        this.title = title;
+        this.context = context;
+        this.views = views;
+        this.likes = likes;
+        this.sendDate = sendDate;
+        this.likeList = likeList;
+    }
 
     public void addComment(Comment comment){
         this.comments.add(comment);
@@ -57,16 +70,6 @@ public class Topic {
         this.likeList = likeList;
     }
 
-    public Topic(BigInteger id, String ownerId, List<String> imgUrl, List<Comment> comments, String context, Integer views, Integer likes, Date sendDate) {
-        this.id = id;
-        this.ownerId = ownerId;
-        this.imgUrl = imgUrl;
-        this.comments = comments;
-        this.context = context;
-        this.views = views;
-        this.likes = likes;
-        this.sendDate = sendDate;
-    }
 
     public BigInteger getId() {
         return id;
@@ -76,11 +79,11 @@ public class Topic {
         this.id = id;
     }
 
-    public String getOwnerId() {
+    public BigInteger getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(BigInteger ownerId) {
         this.ownerId = ownerId;
     }
 

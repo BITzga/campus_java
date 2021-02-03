@@ -74,13 +74,13 @@ public class TopicController {
     }
 
     @PostMapping("/topic/{id}/comment")
-    public QResult<Topic> comment(@PathVariable BigInteger topicId,@RequestParam Comment newCommend){
-        topicService.comment(topicId,newCommend);
+    public QResult<Topic> comment(@PathVariable BigInteger id,@RequestParam Comment newCommend){
+        topicService.comment(id,newCommend);
         return new QResult<>(null,StateEnum.SUCCESS.getState());
     }
-    @PostMapping("/topic/{id}/comment")
-    public QResult<Topic> comment(@PathVariable BigInteger topicId,@RequestParam BigInteger commandId,@RequestParam Comment newCommend){
-        topicService.comment(topicId,commandId,newCommend);
+    @PostMapping("/topic/{id}/comment/{commandId}")
+    public QResult<Topic> comment(@PathVariable BigInteger id,@PathVariable BigInteger commandId,@RequestParam Comment newCommend){
+        topicService.comment(id,commandId,newCommend);
         return new QResult<>(null,StateEnum.SUCCESS.getState());
     }
 
