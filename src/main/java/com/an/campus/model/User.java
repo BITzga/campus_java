@@ -3,17 +3,19 @@ package com.an.campus.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 @Document
 public class User {
     @Id
-    private String id;
+    private BigInteger id;
     private String username;
     private String pwd;
     private String gender;
     private String email;
     private String headImgUrl;
+
 
     @Override
     public String toString() {
@@ -66,11 +68,11 @@ public class User {
 
     private String headImg;
 
-    public String getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 

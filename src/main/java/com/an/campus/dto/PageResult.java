@@ -1,12 +1,11 @@
 package com.an.campus.dto;
 
 public class PageResult<T> extends QResult<T> {
-    private T data;
     private Integer pageSize;
     private Integer pageCount;
-    private Integer status;
 
-    public PageResult(T data, Integer pageSize, Integer pageCount, Integer status) {
+
+    public PageResult(T data, Integer status, Integer pageSize, Integer pageCount) {
         super(data, status);
         this.pageSize = pageSize;
         this.pageCount = pageCount;

@@ -23,6 +23,39 @@ public class Topic {
     private Integer likes;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
+    private List<BigInteger> likeList;
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+    }
+    public void addComment(BigInteger commentId,Comment newComment){
+        for (var comment: comments){
+            if(comment.getCommentId()==commentId){
+                comment.addComment(newComment);
+            }
+        }
+    }
+    public void removeLike(BigInteger userId){
+        this.likeList.remove(userId);
+    }
+    public void addLike(BigInteger userId){
+        this.likeList.add(userId);
+    }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<BigInteger> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<BigInteger> likeList) {
+        this.likeList = likeList;
+    }
 
     public Topic(BigInteger id, String ownerId, List<String> imgUrl, List<Comment> comments, String context, Integer views, Integer likes, Date sendDate) {
         this.id = id;

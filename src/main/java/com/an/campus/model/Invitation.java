@@ -27,6 +27,7 @@ public class Invitation {
     private Date deadline;
     private Integer followCount;
     private List<User> followers;
+    private String position;
 
     @Override
     public String toString() {

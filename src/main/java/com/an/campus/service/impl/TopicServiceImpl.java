@@ -1,5 +1,8 @@
 package com.an.campus.service.impl;
 
+import com.an.campus.constants.StateEnum;
+import com.an.campus.dto.PageResult;
+import com.an.campus.model.Comment;
 import com.an.campus.model.Topic;
 import com.an.campus.repository.TopicRepository;
 import com.an.campus.service.TopicService;
@@ -18,13 +21,75 @@ public class TopicServiceImpl implements TopicService {
     @Autowired
     TopicRepository topicRepository;
 
+    @Override
+    public boolean comment(BigInteger topicId,Comment newComment) {
+        Optional<Topic> topic = topicRepository.findById(topicId);
+        if(topic.isEmpty())
+            return false;
+        else {
+            topic.get().addComment(newComment);
+            return true;
+        }
+    }
 
     @Override
-    public List<Topic> getTopics(Integer currentPage) {
+    public boolean comment(BigInteger topicId, BigInteger commentId,Comment newComment) {
+        Optional<Topic> topic = topicRepository.findById(topicId);
+        if(topic.isEmpty())
+            return false;
+        else {
+            topic.get().addComment(commentId,newComment);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean unlikeTopic(BigInteger id, BigInteger userId) {
+        Optional<Topic> topic = topicRepository.findById(id);
+        if(topic.isEmpty())
+            return false;
+        else {
+            topic.get().removeLike(userId);
+            topicRepository.save(topic.get());
+            return true;
+        }
+    }
+
+    @Override
+    public boolean likeTopic(BigInteger id, BigInteger userId) {
+        Optional<Topic> topic = topicRepository.findById(id);
+        if(topic.isEmpty())
+            return false;
+        else {
+            topic.get().addLike(userId);
+            topicRepository.save(topic.get());
+            return true;
+        }
+    }
+
+    @Override
+    public boolean createTopic(Topic topic) {
+        topicRepository.save(topic);
+        return true;
+    }
+    @Override
+    public PageResult<List<Comment>> getComments(BigInteger topicId){
+
+        Optional<Topic> topic = topicRepository.findById(topicId);
+        if(topic.isEmpty()){
+            return new PageResult<>(null,StateEnum.ERROR.getState(), 10,0);
+        }else {
+            return new PageResult<>(topic.get().getComments(), StateEnum.SUCCESS.getState(), 10,1);
+        }
+    }
+
+    @Override
+    public PageResult<List<Topic>> getTopics(Integer currentPage) {
         Pageable page = PageRequest.of(currentPage,10);
         Page<Topic> pages =topicRepository.findAll(page);
         List<Topic> topics = pages.toList();
-        return topics;
+        PageResult<List<Topic>> pageResult = new PageResult<>(topics, StateEnum.SUCCESS.getState(), 10,currentPage);
+        return pageResult;
     }
 
     @Override
