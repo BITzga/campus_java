@@ -2,26 +2,38 @@ package com.an.campus.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.Id;
 
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+
 public class Comment {
     private BigInteger commentId;
     private BigInteger belongId;
     private BigInteger replyToId;
+    private BigInteger userId;
     private String context;
-    private String userId;
     private String headImg;
     private Integer likes;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
     private List<Comment> subComments;
 
-    public Comment(String context) {
+    public Comment(BigInteger commentId, BigInteger belongId, BigInteger replyToId, BigInteger userId, String context, String headImg, Integer likes, Date sendDate, List<Comment> subComments) {
+        this.commentId = commentId;
+        this.belongId = belongId;
+        this.replyToId = replyToId;
+        this.userId = userId;
         this.context = context;
+        this.headImg = headImg;
+        this.likes = likes;
+        this.sendDate = sendDate;
+        this.subComments = subComments;
     }
+
+
 
     public void addComment(Comment comment){
         this.subComments.add(comment);
@@ -58,11 +70,11 @@ public class Comment {
         this.context = context;
     }
 
-    public String getUserId() {
+    public BigInteger getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(BigInteger userId) {
         this.userId = userId;
     }
 

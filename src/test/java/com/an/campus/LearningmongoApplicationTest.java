@@ -34,18 +34,36 @@ class LearningmongoApplicationTest {
     TopicService topicService;
     private static Random random=new Random();
     private Topic createTopic(int minus){
-        int ranValue=99999999;
+        int ranValue=1000000000;
         ArrayList<String> imgUrls = new ArrayList<>();
         ArrayList<Comment> comments = new ArrayList<>();
         ArrayList<BigInteger> likeList = new ArrayList<>();
         likeList.add(BigInteger.valueOf(211111));
         likeList.add(BigInteger.valueOf(111111));
-        comments.add(new Comment("评论1"));
-        comments.add(new Comment("评论2"));
-        comments.add(new Comment("评论3"));
+        Comment comment1 = new Comment(
+                BigInteger.valueOf(1234),
+                BigInteger.valueOf(1000000000),
+                BigInteger.valueOf(1234),
+                BigInteger.valueOf(1234),
+                "一级评论",
+                "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
+                50,
+                new Date(),new ArrayList<>());
+        Comment comment2 = new Comment(
+                BigInteger.valueOf(4567),
+                BigInteger.valueOf(1000000000),
+                BigInteger.valueOf(1234),
+                BigInteger.valueOf(1234),
+                "二级评论",
+                "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
+                50,
+                new Date(),new ArrayList<>());
+        comment1.addComment(comment2);
+        comments.add(comment1);
+
         imgUrls.add("https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg");
         imgUrls.add("https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg");
-        var topic=new Topic(BigInteger.valueOf(ranValue+minus),BigInteger.valueOf(123),imgUrls,null,
+        var topic=new Topic(BigInteger.valueOf(ranValue+minus),BigInteger.valueOf(123),imgUrls,comments,
                 "南校区篮球场","约球",50,20,new Date(),likeList);
 
         return topic;
@@ -59,8 +77,8 @@ class LearningmongoApplicationTest {
             topicRepository.save(topic);
         }
         System.out.println(topics);
-        System.out.println(topicRepository.findById(BigInteger.valueOf(99999999)));
-
+        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000000)));
+        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000001)));
 
     }
 }
