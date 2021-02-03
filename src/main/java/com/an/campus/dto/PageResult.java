@@ -1,14 +1,21 @@
 package com.an.campus.dto;
 
+import org.springframework.data.domain.Pageable;
+
 public class PageResult<T> extends QResult<T> {
-    private Integer pageSize;
-    private Integer pageCount;
+    private Pageable pageable;
 
-
-    public PageResult(T data, Integer status, Integer pageSize, Integer pageCount) {
+    public PageResult(T data, Integer status, Pageable pageable) {
         super(data, status);
-        this.pageSize = pageSize;
-        this.pageCount = pageCount;
+        this.pageable = pageable;
+    }
+
+    public Pageable getPageable() {
+        return pageable;
+    }
+
+    public void setPageable(Pageable pageable) {
+        this.pageable = pageable;
     }
 
     public Integer getStatus() {
@@ -27,19 +34,5 @@ public class PageResult<T> extends QResult<T> {
         this.data = data;
     }
 
-    public Integer getPageSize() {
-        return pageSize;
-    }
 
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Integer getPageCount() {
-        return pageCount;
-    }
-
-    public void setPageCount(Integer pageCount) {
-        this.pageCount = pageCount;
-    }
 }
