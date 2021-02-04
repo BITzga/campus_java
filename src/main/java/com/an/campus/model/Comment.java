@@ -35,7 +35,7 @@ public class Comment {
 
 
 
-    public void addComment(Comment comment){
+    public synchronized void addComment(Comment comment){
         this.subComments.add(comment);
     }
     public BigInteger getCommentId() {

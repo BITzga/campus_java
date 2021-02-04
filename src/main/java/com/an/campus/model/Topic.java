@@ -39,22 +39,30 @@ public class Topic {
     }
 
     public void addComment(Comment comment){
-        this.comments.add(comment);
+        synchronized (this) {
+            this.comments.add(comment);
+        }
     }
     public void addComment(BigInteger commentId,Comment newComment){
-        for (var comment: comments){
-            if(comment.getCommentId()==commentId){
-                comment.addComment(newComment);
+        synchronized (this) {
+            for (var comment : comments) {
+                if (comment.getCommentId() == commentId) {
+                    comment.addComment(newComment);
+                }
             }
         }
     }
     public void removeLike(BigInteger userId){
-        this.likes--;
-        this.likeList.remove(userId);
+        synchronized (this){
+            this.likes--;
+            this.likeList.remove(userId);
+        }
     }
     public void addLike(BigInteger userId){
-        this.likes++;
-        this.likeList.add(userId);
+        synchronized (this) {
+            this.likes++;
+            this.likeList.add(userId);
+        }
     }
     public String getTitle() {
         return title;
