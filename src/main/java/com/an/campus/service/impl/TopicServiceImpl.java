@@ -28,6 +28,7 @@ public class TopicServiceImpl implements TopicService {
             return false;
         else {
             topic.get().addComment(newComment);
+            topicRepository.save(topic.get());
             return true;
         }
     }
@@ -39,6 +40,7 @@ public class TopicServiceImpl implements TopicService {
             return false;
         else {
             topic.get().addComment(commentId,newComment);
+            topicRepository.save(topic.get());
             return true;
         }
     }
