@@ -24,9 +24,9 @@ public class UploadController {
             file.transferTo(dest);
         } catch (Exception e) {
             e.printStackTrace();
-            return new UploadResult(StateEnum.ERROR.getState(), "");
+            return new UploadResult(StateEnum.ERROR.getState(), null);
         }
-        return new UploadResult(StateEnum.SUCCESS.getState(),imgFilePath + fileName);
+        return new UploadResult(StateEnum.SUCCESS.getState(),"/images/img/" + fileName);
 
     }
     @PostMapping("/headImg/upload")
@@ -39,9 +39,9 @@ public class UploadController {
             file.transferTo(dest);
         } catch (Exception e) {
             e.printStackTrace();
-            return new UploadResult(StateEnum.ERROR.getState(), "");
+            return new UploadResult(StateEnum.ERROR.getState(), null);
         }
-        return new UploadResult(StateEnum.SUCCESS.getState(),imgFilePath + fileName);
+        return new UploadResult(StateEnum.SUCCESS.getState(),"/images/head/" + fileName);
 
     }
 }
