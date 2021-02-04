@@ -21,6 +21,7 @@ import java.util.Optional;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping(produces = "application/json")
 public class TopicController {
 

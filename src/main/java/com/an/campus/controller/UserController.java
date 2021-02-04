@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 
 @RestController
+@CrossOrigin
 @RequestMapping(produces = "application/json")
 public class UserController {
     @Autowired
