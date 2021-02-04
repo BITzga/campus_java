@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -15,8 +16,13 @@ public class User {
     private String gender;
     private String email;
     private String headImgUrl;
+    private List<BigInteger> joinList;
 
 
+    public User setDefaultId(BigInteger id){
+        this.id = id;
+        return this;
+    }
     @Override
     public String toString() {
         return "User{" +

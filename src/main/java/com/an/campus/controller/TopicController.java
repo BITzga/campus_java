@@ -8,6 +8,8 @@ import com.an.campus.model.Topic;
 import com.an.campus.model.User;
 import com.an.campus.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,9 @@ public class TopicController {
     @Autowired
     TopicService topicService;
     @GetMapping("/topics")
-    public PageResult<List<Topic>> getTopicList(@RequestParam(defaultValue = "0") Integer currentPage){
+    public PageResult<Page<Topic>> getTopicList(Pageable pageable){
 
-        return topicService.getTopics(currentPage);
+        return topicService.getTopics(pageable);
     }
 
     @GetMapping("/topic/{id}")
@@ -40,11 +42,11 @@ public class TopicController {
              return qResult;
         }
     }
-    @GetMapping("/topic/{id}/comments")
-    public PageResult<List<Comment>> getTopicComments(@PathVariable BigInteger id){
-
-        return topicService.getComments(id);
-    }
+//    @GetMapping("/topic/{id}/comments")
+//    public PageResult<List<Comment>> getTopicComments(@PathVariable BigInteger id){
+//
+//        return topicService.getComments(id);
+//    }
     @PostMapping("/topic")
     public QResult<Topic> postTopic(@RequestBody @Validated Topic topic){
         if(topicService.createTopic(topic))

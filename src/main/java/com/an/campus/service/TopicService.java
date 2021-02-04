@@ -3,6 +3,8 @@ package com.an.campus.service;
 import com.an.campus.dto.PageResult;
 import com.an.campus.model.Comment;
 import com.an.campus.model.Topic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -14,7 +16,6 @@ public interface TopicService {
     boolean unlikeTopic(BigInteger id,BigInteger userId);
     boolean likeTopic(BigInteger id,BigInteger userId);
     boolean createTopic(Topic topic);
-    PageResult<List<Comment>> getComments(BigInteger topicId);
-    PageResult<List<Topic>> getTopics(Integer currentPage);
+    PageResult<Page<Topic>> getTopics(Pageable pageable);
     Optional<Topic> getTopic(BigInteger id);
 }

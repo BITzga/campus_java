@@ -72,23 +72,22 @@ public class TopicServiceImpl implements TopicService {
         topicRepository.save(topic);
         return true;
     }
-    @Override
-    public PageResult<List<Comment>> getComments(BigInteger topicId){
+//    @Override
+//    public PageResult<List<Comment>> getComments(BigInteger topicId){
+//
+//        Optional<Topic> topic = topicRepository.findById(topicId);
+//        if(topic.isEmpty()){
+//            return new PageResult<List<Comment>>(null,StateEnum.ERROR.getState(), 10,0);
+//        }else {
+//            return new PageResult<List<Comment>>(topic.get().getComments(), StateEnum.SUCCESS.getState(), 10,1);
+//        }
+//    }
 
-        Optional<Topic> topic = topicRepository.findById(topicId);
-        if(topic.isEmpty()){
-            return new PageResult<>(null,StateEnum.ERROR.getState(), 10,0);
-        }else {
-            return new PageResult<>(topic.get().getComments(), StateEnum.SUCCESS.getState(), 10,1);
-        }
-    }
-
     @Override
-    public PageResult<List<Topic>> getTopics(Integer currentPage) {
-        Pageable page = PageRequest.of(currentPage,10);
-        Page<Topic> pages =topicRepository.findAll(page);
-        List<Topic> topics = pages.toList();
-        PageResult<List<Topic>> pageResult = new PageResult<>(topics, StateEnum.SUCCESS.getState(), 10,currentPage);
+    public PageResult<Page<Topic>> getTopics(Pageable pageable) {
+
+        Page<Topic> pages =topicRepository.findAll(pageable);
+        PageResult<Page<Topic>> pageResult = new PageResult<>(pages, StateEnum.SUCCESS.getState(), pageable);
         return pageResult;
     }
 

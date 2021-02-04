@@ -9,7 +9,8 @@ import java.math.BigInteger;
 import java.util.Optional;
 
 
-public interface TopicRepository extends MongoRepository<Topic,String> {
+public interface TopicRepository extends MongoRepository<Topic,BigInteger> {
+    Page<Topic> findByOwnerId(BigInteger ownerId,Pageable pageable);
     Page<Topic> findAll(Pageable page);
     Optional<Topic> findById(BigInteger id);
 }

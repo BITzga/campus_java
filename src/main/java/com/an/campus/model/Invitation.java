@@ -21,6 +21,7 @@ public class Invitation {
     private String context;
     private Integer views;
     private Integer likes;
+    private List<BigInteger> likeList;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -28,6 +29,46 @@ public class Invitation {
     private Integer followCount;
     private List<User> followers;
     private String position;
+    public synchronized Invitation like(BigInteger userId){
+        likeList.add(userId);
+        likes++;
+        return this;
+    }
+    public synchronized Invitation unlike(BigInteger userId){
+        likeList.remove(userId);
+        likes--;
+        return this;
+    }
+    public synchronized Invitation minusFollower(User user){
+        followers.remove(user);
+        followCount--;
+        return this;
+    }
+    public synchronized Invitation addFollower(User user){
+        followers.add(user);
+        followCount++;
+        return this;
+    }
+    public boolean commentIsEmpty(BigInteger commentId){
+        for (var comment: comments){
+            if(comment.getCommentId()==commentId){
+                return false;
+            }
+        }
+        return true;
+    }
+    public synchronized Invitation addComment(Comment comment){
+        this.comments.add(comment);
+        return this;
+    }
+    public synchronized Invitation addSubComment(BigInteger commentId,Comment newComment){
+        for (var comment: comments){
+            if(comment.getCommentId()==commentId){
+                comment.addComment(newComment);
+            }
+        }
+        return this;
+    }
 
     @Override
     public String toString() {
