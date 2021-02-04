@@ -7,10 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.math.BigInteger;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Document
@@ -53,11 +50,15 @@ public class Topic {
 
     public void addComment(Comment comment){
         synchronized (this) {
+            if(comments==null)
+                comments = new ArrayList<>();
             this.comments.add(comment);
         }
     }
     public void addComment(BigInteger commentId,Comment newComment){
         synchronized (this) {
+            if(comments==null)
+                comments = new ArrayList<>();
             for (var comment : comments) {
                 if (comment.getCommentId() == commentId) {
                     comment.addComment(newComment);
@@ -67,13 +68,21 @@ public class Topic {
     }
     public void removeLike(BigInteger userId){
         synchronized (this){
+            if(likes==null)
+                likes=0;
             this.likes--;
+            if(likeList==null)
+                likeList = new ArrayList<>();
             this.likeList.remove(userId);
         }
     }
     public void addLike(BigInteger userId){
         synchronized (this) {
+            if(likes==null)
+                likes=0;
             this.likes++;
+            if(likeList==null)
+                likeList = new ArrayList<>();
             this.likeList.add(userId);
         }
     }

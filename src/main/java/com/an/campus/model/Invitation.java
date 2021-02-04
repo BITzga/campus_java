@@ -48,27 +48,42 @@ public class Invitation {
 
 
     public synchronized Invitation like(BigInteger userId){
+        if(likes==null)
+            likes=0;
+        if(likeList==null)
+            likeList = new ArrayList<>();
         likeList.add(userId);
         likes++;
         return this;
     }
     public synchronized Invitation unlike(BigInteger userId){
+        if(likes==null)
+            likes=0;
+        if(likeList==null)
+            likeList = new ArrayList<>();
         likeList.remove(userId);
         likes--;
         return this;
     }
     public synchronized Invitation minusFollower(User user){
+        if(followCount==null)
+            followCount=0;
+        if(followers==null)
+            followers = new ArrayList<>();
         followers.remove(user);
         followCount--;
         return this;
     }
     public synchronized Invitation addFollower(User user){
-
+        if(followCount==null)
+            followCount=0;
+        if(followers==null)
+            followers = new ArrayList<>();
         followers.add(user);
         followCount++;
         return this;
     }
-    public boolean commentIsEmpty(BigInteger commentId){
+    public synchronized boolean commentIsEmpty(BigInteger commentId){
         for (var comment: comments){
             if(comment.getCommentId()==commentId){
                 return false;
@@ -77,10 +92,14 @@ public class Invitation {
         return true;
     }
     public synchronized Invitation addComment(Comment comment){
+        if(comments==null)
+            comments = new ArrayList<>();
         this.comments.add(comment);
         return this;
     }
     public synchronized Invitation addSubComment(BigInteger commentId,Comment newComment){
+        if(comments==null)
+            comments = new ArrayList<>();
         for (var comment: comments){
             if(comment.getCommentId()==commentId){
                 comment.addComment(newComment);
