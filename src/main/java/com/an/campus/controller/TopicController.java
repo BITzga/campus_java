@@ -49,7 +49,7 @@ public class TopicController {
 //        return topicService.getComments(id);
 //    }
     @PostMapping("/topic")
-    public QResult<Topic> postTopic(@RequestBody  Topic topic){
+    public QResult<Topic> postTopic(@RequestBody @Validated Topic topic){
         if(topicService.createTopic(topic))
             return new QResult<>(topic,StateEnum.SUCCESS.getState());
         else{

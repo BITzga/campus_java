@@ -49,9 +49,11 @@ public class Topic {
         }
     }
     public void removeLike(BigInteger userId){
+        this.likes--;
         this.likeList.remove(userId);
     }
     public void addLike(BigInteger userId){
+        this.likes++;
         this.likeList.add(userId);
     }
     public String getTitle() {
