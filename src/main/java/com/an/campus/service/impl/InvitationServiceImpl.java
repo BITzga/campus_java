@@ -27,7 +27,7 @@ public class InvitationServiceImpl implements InvitationService {
     public PageResult<Page<Invitation> > getPages(String tag, Pageable pageable) {
         Page<Invitation> pages;
 
-        if (tag == "all") {
+        if (tag.equals("all")) {
             pages = invitationRepository.findAll(pageable);
 
         } else {

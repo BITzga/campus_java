@@ -16,7 +16,7 @@ public class Comment {
     private BigInteger userId;
     private String context;
     private String headImg;
-    private Integer likes;
+    private Integer likes=0;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
     private List<Comment> subComments;
