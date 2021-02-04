@@ -46,11 +46,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public synchronized QResult<User> createUser(User user) {
-        Optional<User> newUser = userRepository.save(user.setDefaultId(getNewID()));
-        if(newUser.isEmpty())
+        User newUser = userRepository.save(user.setDefaultId(getNewID()));
+        if(newUser==null)
             return new QResult<User>(null, StateEnum.ERROR.getState());
         else {
-            return new QResult<User>(newUser.get(), StateEnum.SUCCESS.getState());
+            return new QResult<User>(newUser, StateEnum.SUCCESS.getState());
         }
     }
 

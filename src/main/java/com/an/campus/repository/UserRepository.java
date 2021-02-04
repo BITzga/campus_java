@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserRepository extends MongoRepository<User,BigInteger> {
     Optional<User> findById(User user);
-    Optional<User> save(User user);
+    User save(User user);
 
 
 }
