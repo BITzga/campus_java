@@ -23,7 +23,12 @@ public class InvitationServiceImpl implements InvitationService {
     InvitationRepository invitationRepository;
     @Autowired
     UserRepository userRepository;
+    private static BigInteger ID=BigInteger.valueOf(10000);
 
+    private synchronized BigInteger getNewID(){
+        ID=ID.add(BigInteger.valueOf(1));
+        return ID;
+    }
     public PageResult<Page<Invitation> > getPages(String tag, Pageable pageable) {
         Page<Invitation> pages;
 
@@ -54,6 +59,7 @@ public class InvitationServiceImpl implements InvitationService {
 
     @Override
     public QResult<Invitation> create(Invitation invitation) {
+        invitation.setId(getNewID());
         Invitation detail;
         detail = invitationRepository.save(invitation);
         if(detail==null)

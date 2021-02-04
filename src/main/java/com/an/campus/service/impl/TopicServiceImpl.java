@@ -21,6 +21,12 @@ public class TopicServiceImpl implements TopicService {
     @Autowired
     TopicRepository topicRepository;
 
+    private static BigInteger ID=BigInteger.valueOf(10000);
+
+    private synchronized BigInteger getNewID(){
+        ID=ID.add(BigInteger.valueOf(1));
+        return ID;
+    }
     @Override
     public boolean comment(BigInteger topicId,Comment newComment) {
         Optional<Topic> topic = topicRepository.findById(topicId);
@@ -71,6 +77,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public boolean createTopic(Topic topic) {
+        topic.setId(getNewID());
         topicRepository.save(topic);
         System.out.println(topic);
         return true;

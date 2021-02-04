@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -43,7 +44,7 @@ public class InvitationController {
 
     }
     @PostMapping("/invitation")             //发起邀请
-    public QResult<Invitation> createInvitation(@RequestBody  Invitation invitation){
+    public QResult<Invitation> createInvitation(@RequestBody @Validated Invitation invitation){
         
         return invitationService.create(invitation);
     }

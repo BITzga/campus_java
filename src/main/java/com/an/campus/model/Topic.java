@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.math.BigInteger;
 import java.util.Collections;
 import java.util.Date;
@@ -13,18 +15,28 @@ import java.util.Objects;
 
 @Document
 public class Topic {
+    @Null
     @Id
     private BigInteger id;
+    @NotNull
     private BigInteger ownerId;
-    private List<String> imgUrl= Collections.EMPTY_LIST;
-    private List<Comment> comments=Collections.EMPTY_LIST;
+    @NotNull
+    private List<String> imgUrl;
+    @Null
+    private List<Comment> comments;
+    @NotNull
     private String title;
+    @NotNull
     private String context;
-    private Integer views=0;
-    private Integer likes=0;
+    @Null
+    private Integer views;
+    @Null
+    private Integer likes;
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
-    private List<BigInteger> likeList=Collections.EMPTY_LIST;
+    @Null
+    private List<BigInteger> likeList;
 
     public Topic(BigInteger id, BigInteger ownerId, List<String> imgUrl, List<Comment> comments, String title, String context, Integer views, Integer likes, Date sendDate, List<BigInteger> likeList) {
         this.id = id;

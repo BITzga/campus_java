@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     TopicRepository topicRepository;
 
     private synchronized BigInteger getNewID(){
-        ID.add(BigInteger.valueOf(1));
+        ID=ID.add(BigInteger.valueOf(1));
         return ID;
     }
     @Override
