@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Random;
 
 @SpringBootTest
-@EnableMongoRepositories(basePackageClasses =InvitationRepository.class)
+
 class LearningmongoApplicationTest {
 
     @Autowired
@@ -34,7 +34,7 @@ class LearningmongoApplicationTest {
     TopicService topicService;
     private static Random random=new Random();
     private Topic createTopic(int minus){
-        int ranValue=1000000000;
+        int ranValue=5555555;
         ArrayList<String> imgUrls = new ArrayList<>();
         ArrayList<Comment> comments = new ArrayList<>();
         ArrayList<BigInteger> likeList = new ArrayList<>();

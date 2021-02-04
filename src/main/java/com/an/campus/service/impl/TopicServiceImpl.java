@@ -70,6 +70,7 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public boolean createTopic(Topic topic) {
         topicRepository.save(topic);
+        System.out.println(topic);
         return true;
     }
 //    @Override

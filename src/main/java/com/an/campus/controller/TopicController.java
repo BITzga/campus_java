@@ -49,11 +49,11 @@ public class TopicController {
 //        return topicService.getComments(id);
 //    }
     @PostMapping("/topic")
-    public QResult<Topic> postTopic(@RequestBody @Validated Topic topic){
+    public QResult<Topic> postTopic(@RequestBody  Topic topic){
         if(topicService.createTopic(topic))
-            return new QResult<>(null,StateEnum.SUCCESS.getState());
+            return new QResult<>(topic,StateEnum.SUCCESS.getState());
         else{
-            return new QResult<>(null,StateEnum.ERROR.getState());
+            return new QResult<>(topic,StateEnum.ERROR.getState());
         }
     }
     @PostMapping("/topic/{id}/like")
