@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.an</groupId>
-    <artifactId>learningmongo</artifactId>
+    <artifactId>CampusJava</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>learningmongo</name>
+    <name>CampusJava</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
