@@ -1,26 +1,35 @@
 package com.an.campus.model;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
-@Component
+
 public class Activity {
-    String Tag;
-    Date deadline;
-    Date start;
-    Date end;
-    Invitation followCount;
-    private List<User> followers;
-    private String position;
+    @NotNull
+    public String tag;
+    @NotNull
+    public Date deadline;
+    @NotNull
+    public Date start;
+    @NotNull
+    public Date end;
+    @NotNull
+    public String position;
+
+    public Integer followCount;
+    public List<User> followers;
 
     public String getTag() {
-        return Tag;
+        return tag;
     }
 
     public void setTag(String tag) {
-        Tag = tag;
+        this.tag = tag;
     }
 
     public Date getDeadline() {
@@ -47,11 +56,19 @@ public class Activity {
         this.end = end;
     }
 
-    public Invitation getFollowCount() {
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public Integer getFollowCount() {
         return followCount;
     }
 
-    public void setFollowCount(Invitation followCount) {
+    public void setFollowCount(Integer followCount) {
         this.followCount = followCount;
     }
 
@@ -61,13 +78,5 @@ public class Activity {
 
     public void setFollowers(List<User> followers) {
         this.followers = followers;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
 }

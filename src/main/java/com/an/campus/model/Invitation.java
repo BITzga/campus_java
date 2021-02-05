@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.math.BigInteger;
@@ -18,9 +21,11 @@ public class Invitation {
     @NotNull
     private BigInteger ownerId;
     @NotNull
-    private String tag;
+    private String ownerName;
     @NotNull
     private List<String> imgUrl;
+    @NotNull
+    private String tag;
     @Null
     private List<Comment> comments;
     @NotNull
@@ -37,14 +42,8 @@ public class Invitation {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date deadline;
-    @Null
-    private Integer followCount;
-    @Null
-    private List<User> followers;
-    @NotNull
-    private String position;
+    @Valid
+    private Activity activity;
 
 
     public synchronized Invitation like(BigInteger userId){
@@ -66,21 +65,21 @@ public class Invitation {
         return this;
     }
     public synchronized Invitation minusFollower(User user){
-        if(followCount==null)
-            followCount=0;
-        if(followers==null)
-            followers = new ArrayList<>();
-        followers.remove(user);
-        followCount--;
+        if(activity.followCount==null)
+            activity.followCount=0;
+        if(activity.followers==null)
+            activity.followers = new ArrayList<>();
+        activity.followers.remove(user);
+        activity.followCount--;
         return this;
     }
     public synchronized Invitation addFollower(User user){
-        if(followCount==null)
-            followCount=0;
-        if(followers==null)
-            followers = new ArrayList<>();
-        followers.add(user);
-        followCount++;
+        if(activity.followCount==null)
+            activity.followCount=0;
+        if(activity.followers==null)
+            activity.followers = new ArrayList<>();
+        activity.followers.add(user);
+        activity.followCount++;
         return this;
     }
     public synchronized boolean commentIsEmpty(BigInteger commentId){
@@ -108,24 +107,23 @@ public class Invitation {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "Invitation{" +
-                "id=" + id +
-                ", ownerId='" + ownerId + '\'' +
-                ", tag='" + tag + '\'' +
-                ", imgUrl='" + imgUrl + '\'' +
-                ", comments=" + comments +
-                ", context='" + context + '\'' +
-                ", views=" + views +
-                ", likes=" + likes +
-                ", sendDate=" + sendDate +
-                ", deadline=" + deadline +
-                ", followCount=" + followCount +
-                ", followers=" + followers +
-                '}';
+
+
+    public Activity getActivity() {
+        return activity;
     }
 
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
     public String getTitle() {
         return title;
     }
@@ -140,14 +138,6 @@ public class Invitation {
 
     public void setLikeList(List<BigInteger> likeList) {
         this.likeList = likeList;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
 
     public BigInteger getId() {
@@ -174,18 +164,6 @@ public class Invitation {
         this.tag = tag;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Invitation that = (Invitation) o;
-        return id.equals(that.id) && Objects.equals(ownerId, that.ownerId) && Objects.equals(tag, that.tag) && Objects.equals(imgUrl, that.imgUrl) && Objects.equals(comments, that.comments) && Objects.equals(context, that.context) && Objects.equals(views, that.views) && Objects.equals(likes, that.likes) && Objects.equals(sendDate, that.sendDate) && Objects.equals(deadline, that.deadline) && Objects.equals(followCount, that.followCount) && Objects.equals(followers, that.followers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, ownerId, tag, imgUrl, comments, context, views, likes, sendDate, deadline, followCount, followers);
-    }
 
     public List<String> getImgUrl() {
         return imgUrl;
@@ -235,27 +213,4 @@ public class Invitation {
         this.sendDate = sendDate;
     }
 
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public Integer getFollowCount() {
-        return followCount;
-    }
-
-    public void setFollowCount(Integer followCount) {
-        this.followCount = followCount;
-    }
-
-    public List<User> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
-    }
 }

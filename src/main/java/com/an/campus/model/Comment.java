@@ -14,6 +14,7 @@ public class Comment {
     private BigInteger belongId;
     private BigInteger replyToId;
     private BigInteger userId;
+    private String username;
     private String context;
     private String headImg;
     private Integer likes=0;
@@ -60,6 +61,14 @@ public class Comment {
 
     public void setReplyToId(BigInteger replyToId) {
         this.replyToId = replyToId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getContext() {

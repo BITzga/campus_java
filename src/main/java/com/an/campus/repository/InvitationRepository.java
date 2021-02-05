@@ -13,7 +13,6 @@ import java.util.Optional;
 public interface InvitationRepository extends MongoRepository<Invitation,BigInteger> {
     Page<Invitation> findByTag(String tag,Pageable pageable);
     Invitation findFirstByOwnerId(String ownerId);
-    List<Invitation> findInvitationsByTagAndDeadlineBeforeOrderByDeadline(Date date, Pageable pageable);
     Page<Invitation> findByOwnerId(BigInteger userId,Pageable pageable);
     Optional<Invitation> findById(BigInteger i);
 

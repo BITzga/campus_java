@@ -16,8 +16,14 @@ public class User {
     private String gender;
     private String email;
     private String headImgUrl;
-    private List<BigInteger> joinList;
 
+    public String getHeadImgUrl() {
+        return headImgUrl;
+    }
+
+    public void setHeadImgUrl(String headImgUrl) {
+        this.headImgUrl = headImgUrl;
+    }
 
     public User setDefaultId(BigInteger id){
         this.id = id;

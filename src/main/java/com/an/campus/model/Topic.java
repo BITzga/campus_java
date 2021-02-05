@@ -18,6 +18,8 @@ public class Topic {
     @NotNull
     private BigInteger ownerId;
     @NotNull
+    private String username;
+    @NotNull
     private List<String> imgUrl;
     @Null
     private List<Comment> comments;
@@ -86,6 +88,15 @@ public class Topic {
             this.likeList.add(userId);
         }
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getTitle() {
         return title;
     }
