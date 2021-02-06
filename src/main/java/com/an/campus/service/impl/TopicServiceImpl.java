@@ -36,6 +36,12 @@ public class TopicServiceImpl implements TopicService {
         if(topic.isEmpty())
             return false;
         else {
+            Optional<User> user =userRepository.findById(newComment.getUserId());
+            newComment.setCommentId(getNewID());
+            newComment.setBelongId(topicId);
+            newComment.setUsername(user.get().getUsername());
+            newComment.setHeadImg(user.get().getHeadImgUrl());
+            newComment.setLikes(0);
             topic.get().addComment(newComment);
             topicRepository.save(topic.get());
             return true;
@@ -48,6 +54,12 @@ public class TopicServiceImpl implements TopicService {
         if(topic.isEmpty())
             return false;
         else {
+            Optional<User> user =userRepository.findById(newComment.getUserId());
+            newComment.setCommentId(getNewID());
+            newComment.setBelongId(commentId);
+            newComment.setUsername(user.get().getUsername());
+            newComment.setHeadImg(user.get().getHeadImgUrl());
+            newComment.setLikes(0);
             topic.get().addComment(commentId,newComment);
             topicRepository.save(topic.get());
             return true;
@@ -84,6 +96,7 @@ public class TopicServiceImpl implements TopicService {
         Optional<User> user=userRepository.findById(topic.getOwnerId());
         topic.setHeadImg(user.get().getHeadImgUrl());
         topic.setUsername(user.get().getUsername());
+        topic.setLikes(0);
         topicRepository.save(topic);
         System.out.println(topic);
         return true;

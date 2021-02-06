@@ -127,6 +127,12 @@ public class InvitationServiceImpl implements InvitationService {
         if(detail.isEmpty()){
             return new QResult<>(comment,StateEnum.ERROR.getState());
         }else {
+            Optional<User> user =userRepository.findById(comment.getUserId());
+            comment.setCommentId(getNewID());
+            comment.setBelongId(id);
+            comment.setUsername(user.get().getUsername());
+            comment.setHeadImg(user.get().getHeadImgUrl());
+            comment.setLikes(0);
             invitationRepository.save(detail.get().addComment(comment));
             return new QResult<>(comment,StateEnum.SUCCESS.getState());
         }
@@ -138,6 +144,12 @@ public class InvitationServiceImpl implements InvitationService {
         if(detail.isEmpty()||detail.get().commentIsEmpty(commendId))
             return new QResult<>(comment,StateEnum.ERROR.getState());
         else {
+            Optional<User> user =userRepository.findById(comment.getUserId());
+            comment.setCommentId(getNewID());
+            comment.setBelongId(commendId);
+            comment.setUsername(user.get().getUsername());
+            comment.setHeadImg(user.get().getHeadImgUrl());
+            comment.setLikes(0);
             invitationRepository.save(detail.get().addSubComment(commendId,comment));
             return new QResult<>(comment,StateEnum.SUCCESS.getState());
         }

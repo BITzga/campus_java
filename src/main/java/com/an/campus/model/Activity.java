@@ -20,7 +20,7 @@ public class Activity {
     public Date end;
     @NotNull
     public String position;
-
+    @NotNull
     public Integer followCount;
     public List<User> followers;
 

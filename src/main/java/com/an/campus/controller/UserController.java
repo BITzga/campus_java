@@ -30,11 +30,11 @@ public class UserController {
         return userService.createUser(user);
     }
     @GetMapping("/me/{id}/topics") //获取用户发过的帖子、邀请、加入过的邀请
-    public PageResult<Page<Topic>> getTopics(@PathVariable BigInteger id, @RequestBody Pageable pageable){
+    public PageResult<Page<Topic>> getTopics(@PathVariable BigInteger id,  Pageable pageable){
         return userService.getTopics(id,pageable);
     }
     @GetMapping("/me/{id}/invites")
-    public PageResult<Page<Invitation>> getInvites(@PathVariable BigInteger id, @RequestBody Pageable pageable){
+    public PageResult<Page<Invitation>> getInvites(@PathVariable BigInteger id,  Pageable pageable){
         return userService.getInvitations(id,pageable);
     }
     /*

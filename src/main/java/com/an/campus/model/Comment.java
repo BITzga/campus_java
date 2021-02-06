@@ -4,6 +4,7 @@ package com.an.campus.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -12,12 +13,16 @@ import java.util.List;
 public class Comment {
     private BigInteger commentId;
     private BigInteger belongId;
+    @NotNull
     private BigInteger replyToId;
+    @NotNull
     private BigInteger userId;
     private String username;
+    @NotNull
     private String context;
     private String headImg;
     private Integer likes=0;
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sendDate;
     private List<Comment> subComments;
