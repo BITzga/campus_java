@@ -49,13 +49,13 @@ public class InvitationController {
         return invitationService.create(invitation);
     }
     @PostMapping("/invitation/{id}/comment")//给邀请评论
-    public QResult<Comment> comment(@PathVariable BigInteger id,@RequestBody Comment comment){
+    public QResult<Comment> comment(@PathVariable BigInteger id,@RequestBody @Validated Comment comment){
         return invitationService.comment(id,comment);
     }
     @PostMapping("/invitation/{id}/comment/{commandId}")//回复评论
     public QResult<Comment> subComment(@PathVariable BigInteger id,
                                        @PathVariable BigInteger commandId,
-                                       @RequestBody Comment comment){
+                                       @RequestBody @Validated Comment comment){
         return invitationService.subComment(id, commandId, comment);
 
     }

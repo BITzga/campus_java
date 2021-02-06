@@ -67,21 +67,17 @@ public class Invitation {
         return this;
     }
     public synchronized Invitation minusFollower(User user){
-        if(activity.followCount==null)
-            activity.followCount=0;
+
         if(activity.followers==null)
             activity.followers = new ArrayList<>();
         activity.followers.remove(user);
-        activity.followCount--;
         return this;
     }
     public synchronized Invitation addFollower(User user){
-        if(activity.followCount==null)
-            activity.followCount=0;
+
         if(activity.followers==null)
             activity.followers = new ArrayList<>();
         activity.followers.add(user);
-        activity.followCount++;
         return this;
     }
     public synchronized boolean commentIsEmpty(BigInteger commentId){

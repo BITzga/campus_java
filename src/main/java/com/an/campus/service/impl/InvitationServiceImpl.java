@@ -141,7 +141,7 @@ public class InvitationServiceImpl implements InvitationService {
     @Override
     public QResult<Comment> subComment(BigInteger id, BigInteger commendId, Comment comment) {
         Optional<Invitation> detail = invitationRepository.findById(id);
-        if(detail.isEmpty()||detail.get().commentIsEmpty(commendId))
+        if(detail.isEmpty())
             return new QResult<>(comment,StateEnum.ERROR.getState());
         else {
             Optional<User> user =userRepository.findById(comment.getUserId());
