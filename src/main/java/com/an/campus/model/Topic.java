@@ -17,9 +17,9 @@ public class Topic {
     private BigInteger id;
     @NotNull
     private BigInteger ownerId;
-    @NotNull
+    @Null
     private String username;
-    @NotNull
+    @Null
     private String headImg;
     @NotNull
     private List<String> imgUrl;

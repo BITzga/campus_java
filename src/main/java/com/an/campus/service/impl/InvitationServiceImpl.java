@@ -61,6 +61,9 @@ public class InvitationServiceImpl implements InvitationService {
     public QResult<Invitation> create(Invitation invitation) {
         invitation.setId(getNewID());
         Invitation detail;
+        Optional<User> user = userRepository.findById(invitation.getOwnerId());
+        invitation.setHeadImg(user.get().getHeadImgUrl());
+        invitation.setOwnerName(user.get().getUsername());
         detail = invitationRepository.save(invitation);
         if(detail==null)
             return new QResult<>(null,StateEnum.ERROR.getState());

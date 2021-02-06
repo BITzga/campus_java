@@ -20,9 +20,9 @@ public class Invitation {
     private BigInteger id;
     @NotNull
     private BigInteger ownerId;
-    @NotNull
+    @Null
     private String ownerName;
-    @NotNull
+    @Null
     private  String headImg;
     @NotNull
     private List<String> imgUrl;

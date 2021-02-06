@@ -13,8 +13,8 @@ import java.io.File;
 @RestController
 @CrossOrigin
 public class UploadController {
-    private static String imgFilePath = "D://upload//img//";
-    private static String headImgFilePath = "D://upload//head//";
+    private static String imgFilePath = "/root/images/img/";
+    private static String headImgFilePath = "/root/images/head/";
     @PostMapping("/img/upload")
     public UploadResult uploadImg(@RequestParam("file") MultipartFile file){
         String fileName = file.getOriginalFilename();//加上本地地址

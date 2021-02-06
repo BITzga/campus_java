@@ -4,7 +4,9 @@ import com.an.campus.constants.StateEnum;
 import com.an.campus.dto.PageResult;
 import com.an.campus.model.Comment;
 import com.an.campus.model.Topic;
+import com.an.campus.model.User;
 import com.an.campus.repository.TopicRepository;
+import com.an.campus.repository.UserRepository;
 import com.an.campus.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,7 +22,8 @@ import java.util.Optional;
 public class TopicServiceImpl implements TopicService {
     @Autowired
     TopicRepository topicRepository;
-
+    @Autowired
+    UserRepository userRepository;
     private static BigInteger ID=BigInteger.valueOf(10000);
 
     private synchronized BigInteger getNewID(){
@@ -78,6 +81,9 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public boolean createTopic(Topic topic) {
         topic.setId(getNewID());
+        Optional<User> user=userRepository.findById(topic.getOwnerId());
+        topic.setHeadImg(user.get().getHeadImgUrl());
+        topic.setUsername(user.get().getUsername());
         topicRepository.save(topic);
         System.out.println(topic);
         return true;
