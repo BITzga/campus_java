@@ -20,6 +20,8 @@ public class Topic {
     @NotNull
     private String username;
     @NotNull
+    private String headImg;
+    @NotNull
     private List<String> imgUrl;
     @Null
     private List<Comment> comments;
@@ -87,6 +89,14 @@ public class Topic {
                 likeList = new ArrayList<>();
             this.likeList.add(userId);
         }
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
     }
 
     public String getUsername() {

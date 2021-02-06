@@ -17,16 +17,16 @@ public class UploadController {
     private static String headImgFilePath = "D://upload//head//";
     @PostMapping("/img/upload")
     public UploadResult uploadImg(@RequestParam("file") MultipartFile file){
-        String fileName = file.getOriginalFilename();
+        String fileName = file.getOriginalFilename();//加上本地地址
 
         File dest = new File(imgFilePath + fileName);
         try {
-            file.transferTo(dest);
+            file.transferTo(dest);//存到本地
         } catch (Exception e) {
             e.printStackTrace();
-            return new UploadResult(StateEnum.ERROR.getState(), null);
+            return new UploadResult(StateEnum.ERROR.getState(), null);//失败
         }
-        return new UploadResult(StateEnum.SUCCESS.getState(),"/images/img/" + fileName);
+        return new UploadResult(StateEnum.SUCCESS.getState(),"/images/img/" + fileName);//成功，返回url
 
     }
     @PostMapping("/headImg/upload")

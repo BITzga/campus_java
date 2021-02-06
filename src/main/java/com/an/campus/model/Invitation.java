@@ -23,6 +23,8 @@ public class Invitation {
     @NotNull
     private String ownerName;
     @NotNull
+    private  String headImg;
+    @NotNull
     private List<String> imgUrl;
     @NotNull
     private String tag;
@@ -83,8 +85,8 @@ public class Invitation {
         return this;
     }
     public synchronized boolean commentIsEmpty(BigInteger commentId){
-        for (var comment: comments){
-            if(comment.getCommentId()==commentId){
+        for (int i=0;i< comments.size();i++){
+            if(comments.get(i).getCommentId()==commentId){
                 return false;
             }
         }
@@ -99,15 +101,22 @@ public class Invitation {
     public synchronized Invitation addSubComment(BigInteger commentId,Comment newComment){
         if(comments==null)
             comments = new ArrayList<>();
-        for (var comment: comments){
-            if(comment.getCommentId()==commentId){
-                comment.addComment(newComment);
+        for (int i=0;i< comments.size();i++){
+            if(comments.get(i).getCommentId()==commentId){
+                comments.get(i).addComment(newComment);
             }
         }
         return this;
     }
 
 
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
 
     public Activity getActivity() {
         return activity;
