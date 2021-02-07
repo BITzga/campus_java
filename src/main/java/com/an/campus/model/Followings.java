@@ -3,27 +3,46 @@ package com.an.campus.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
 public class Followings {
     @Id
-    private String id;
-    List<User> followings;
+    private BigInteger userId;
+    List<BigInteger> followings;
 
-    public String getId() {
-        return id;
+    public Followings addInvite(BigInteger userId){
+        if(followings==null)
+            followings = new ArrayList<>();
+        followings.add(userId);
+        return this;
+    }
+    public Followings removeInvite(BigInteger userId){
+        if(followings==null)
+            return this;
+        followings.remove(userId);
+        return this;
+    }
+    public Followings(BigInteger userId, List<BigInteger> followings) {
+        this.userId = userId;
+        this.followings = followings;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public BigInteger getUserId() {
+        return userId;
     }
 
-    public List<User> getFollowings() {
+    public void setUserId(BigInteger userId) {
+        this.userId = userId;
+    }
+
+    public List<BigInteger> getFollowings() {
         return followings;
     }
 
-    public void setFollowings(List<User> followings) {
+    public void setFollowings(List<BigInteger> followings) {
         this.followings = followings;
     }
 }

@@ -15,6 +15,5 @@ public interface InvitationRepository extends MongoRepository<Invitation,BigInte
     Invitation findFirstByOwnerId(String ownerId);
     Page<Invitation> findByOwnerId(BigInteger userId,Pageable pageable);
     Optional<Invitation> findById(BigInteger i);
-
     //boolean findByOwnerId(String s);
 }

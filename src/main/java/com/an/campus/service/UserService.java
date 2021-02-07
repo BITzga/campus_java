@@ -15,5 +15,6 @@ public interface UserService {
     QResult<User> createUser(User user);
     PageResult<Page<Topic>> getTopics(BigInteger userId, Pageable pageable);
     PageResult<Page<Invitation>> getInvitations(BigInteger userId, Pageable pageable);
+    PageResult<Page<Invitation>> getJoinedInvitations(BigInteger userId, Pageable pageable);
 
 }

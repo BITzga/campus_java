@@ -37,6 +37,12 @@ public class UserController {
     public PageResult<Page<Invitation>> getInvites(@PathVariable BigInteger id,  Pageable pageable){
         return userService.getInvitations(id,pageable);
     }
+    @GetMapping("/me/{id}/joined")
+    public PageResult<Page<Invitation>> getJoinedInvites(@PathVariable BigInteger id,Pageable pageable){
+
+        return  userService.getJoinedInvitations(id,pageable);
+
+    }
     /*
     @GetMapping("/following")//获取关注的人
     @GetMapping("/followers")//获取粉丝

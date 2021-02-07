@@ -4,8 +4,10 @@ import com.an.campus.constants.StateEnum;
 import com.an.campus.dto.PageResult;
 import com.an.campus.dto.QResult;
 import com.an.campus.model.Comment;
+import com.an.campus.model.Followings;
 import com.an.campus.model.Invitation;
 import com.an.campus.model.User;
+import com.an.campus.repository.FollowingRepository;
 import com.an.campus.repository.InvitationRepository;
 import com.an.campus.repository.UserRepository;
 import com.an.campus.service.InvitationService;
@@ -15,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +27,8 @@ public class InvitationServiceImpl implements InvitationService {
     InvitationRepository invitationRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    FollowingRepository followingRepository;
     private static BigInteger ID=BigInteger.valueOf(10000);
 
     private synchronized BigInteger getNewID(){
@@ -103,6 +109,17 @@ public class InvitationServiceImpl implements InvitationService {
 
             return new QResult<Invitation>(null, StateEnum.ERROR.getState());
         } else {
+            Optional<Followings> followings = followingRepository.findById(userId);
+            if(followings.isEmpty()){
+                List<BigInteger> list = new ArrayList<>();
+                list.add(id);
+                Followings temp = new Followings(userId,list);
+                followingRepository.save(temp);
+            }else {
+                followings.get().getFollowings().add(id);
+                followingRepository.save(followings.get());
+
+            }
             Optional<User> user = userRepository.findById(userId);
             invitationRepository.save(invitation.get().addFollower(user.get()));
             return new QResult<Invitation>(invitation.get(), StateEnum.SUCCESS.getState());
@@ -116,6 +133,13 @@ public class InvitationServiceImpl implements InvitationService {
 
             return new QResult<Invitation>(null, StateEnum.ERROR.getState());
         } else {
+            Optional<Followings> followings = followingRepository.findById(userId);
+            if(followings.isEmpty()){
+                return new QResult<Invitation>(null, StateEnum.ERROR.getState());
+            }else {
+                followings.get().removeInvite(id);
+                followingRepository.save(followings.get());
+            }
             Optional<User> user = userRepository.findById(userId);
             invitationRepository.save(invitation.get().minusFollower(user.get()));
             return new QResult<Invitation>(invitation.get(), StateEnum.SUCCESS.getState());

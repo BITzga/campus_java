@@ -17,6 +17,20 @@ public class User {
     private String email;
     private String headImgUrl;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id) && Objects.equals(username, user.username) && Objects.equals(pwd, user.pwd) && Objects.equals(gender, user.gender) && Objects.equals(email, user.email) && Objects.equals(headImgUrl, user.headImgUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, pwd, gender, email, headImgUrl);
+    }
+
     public String getHeadImgUrl() {
         return headImgUrl;
     }
