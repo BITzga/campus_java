@@ -58,7 +58,7 @@ public class UserController {
 
     }
     @PostMapping("/login")
-    public QResult<Object> login( @RequestBody @Validated User user){
+    public QResult<Object> login( @RequestBody  User user){
 
         System.out.println(user);
         return userService.login(user.getId(),user.getPwd());
