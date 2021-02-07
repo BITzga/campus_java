@@ -28,7 +28,12 @@ public class UserController {
     JwtUtils jwtUtils;
     @Autowired
     UserRepository userRepository;
+    private static BigInteger ID=BigInteger.valueOf(200000);
 
+    private synchronized BigInteger getNewID(){
+        ID=ID.add(BigInteger.valueOf(1));
+        return ID;
+    }
     @GetMapping("/user/{id}") //获取用户基本信息
     public QResult<User> getUser(@PathVariable BigInteger id){
 
@@ -62,8 +67,9 @@ public class UserController {
     }
 
     @PostMapping("/sign")
-    public QResult<Object> sign(String username,String pwd){
-        return new QResult<>(userRepository.save(new User(username,pwd)), StateEnum.SUCCESS.getState());
+    public QResult<Object> sign(@RequestBody @Validated User user){
+        user.setId(getNewID());
+        return new QResult<>(userRepository.save(user), StateEnum.SUCCESS.getState());
     }
 
     /*

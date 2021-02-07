@@ -10,9 +10,10 @@ import java.util.Objects;
 
 @Document
 public class User {
-    @NotNull
+
     @Id
     private BigInteger id;
+    @NotNull
     private String username;
     @NotNull
     private String pwd;
@@ -20,15 +21,20 @@ public class User {
     private String email;
     private String headImgUrl;
 
+    public User(BigInteger id, @NotNull String username, @NotNull String pwd, String gender, String email, String headImgUrl) {
+        this.id = id;
+        this.username = username;
+        this.pwd = pwd;
+        this.gender = gender;
+        this.email = email;
+        this.headImgUrl = headImgUrl;
+    }
+
     public User(BigInteger id, String pwd) {
         this.id = id;
         this.pwd = pwd;
     }
 
-    public User(String username, @NotNull String pwd) {
-        this.username = username;
-        this.pwd = pwd;
-    }
 
     @Override
     public boolean equals(Object o) {
