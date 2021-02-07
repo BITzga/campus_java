@@ -96,8 +96,10 @@ public class Topic {
             if(likes==null)
                 likes=0;
             this.likes--;
+            if(likes.compareTo(0)<0)
+                likes=0;
             if(likeList==null)
-                likeList = new ArrayList<>();
+                return;
             this.likeList.remove(userId);
         }
     }

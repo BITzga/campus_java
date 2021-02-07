@@ -15,10 +15,10 @@ public interface InvitationService {
     PageResult<Page<Invitation>> getPages(String tag, Pageable pageable);
     QResult<Invitation> getDetail(BigInteger id);
     QResult<Invitation> create(Invitation invitation);
-    QResult<Invitation> like(BigInteger id, User user);
-    QResult<Invitation> unlike(BigInteger id, User user);
-    QResult<Invitation> join(BigInteger id, User user);
-    QResult<Invitation> disjoint(BigInteger id, User user);
+    QResult<Invitation> like(BigInteger id,BigInteger userId);
+    QResult<Invitation> unlike(BigInteger id, BigInteger userId);
+    QResult<Invitation> join(BigInteger id, BigInteger userId);
+    QResult<Invitation> disjoint(BigInteger id, BigInteger userId);
     QResult<Comment> comment(BigInteger id, Comment comment);
     QResult<Comment> subComment(BigInteger id, BigInteger commendId, Comment comment);
 }

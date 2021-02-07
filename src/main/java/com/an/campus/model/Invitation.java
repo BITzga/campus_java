@@ -78,6 +78,8 @@ public class Invitation {
             likeList = new ArrayList<>();
         likeList.remove(userId);
         likes--;
+        if(likes.compareTo(0)<0)
+            likes=0;
         return this;
     }
     public synchronized Invitation minusFollower(User user){

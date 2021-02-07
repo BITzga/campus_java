@@ -60,24 +60,24 @@ public class InvitationController {
 
     }
     @PostMapping("/invitation/{id}/like")    //点赞
-    public QResult<Invitation> likeInvitation(@PathVariable BigInteger id, @RequestBody User user){
-        return invitationService.like(id,user);
+    public QResult<Invitation> likeInvitation(@PathVariable BigInteger id,BigInteger userId){
+        return invitationService.like(id,userId);
         
     }
     @DeleteMapping("/invitation/{id}/like")   //取消赞
-    public QResult<Invitation> unlikeInvitation(@PathVariable BigInteger id, @RequestBody User user){
+    public QResult<Invitation> unlikeInvitation(@PathVariable BigInteger id, BigInteger userId){
 
-        return invitationService.unlike(id, user);
+        return invitationService.unlike(id, userId);
     }
     @PostMapping("/invitation/{id}/join")   //加入邀请
-    public QResult<Invitation> joinInvitation(@PathVariable BigInteger id, @RequestBody User user){
+    public QResult<Invitation> joinInvitation(@PathVariable BigInteger id, BigInteger userId){
 
-        return invitationService.join(id,user);
+        return invitationService.join(id,userId);
     }
     @DeleteMapping("/invitation/{id}/join") //取消加入邀请
-    public QResult<Invitation> disjointInvitation(@PathVariable BigInteger id, @RequestBody User user){
+    public QResult<Invitation> disjointInvitation(@PathVariable BigInteger id,  BigInteger userId){
 
-        return invitationService.disjoint(id,user);
+        return invitationService.disjoint(id,userId);
     }
 
 }

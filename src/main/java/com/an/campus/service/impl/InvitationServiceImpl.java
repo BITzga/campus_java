@@ -73,49 +73,51 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public QResult<Invitation> like(BigInteger id, User user) {
+    public QResult<Invitation> like(BigInteger id, BigInteger userId) {
         Optional<Invitation> invitation = invitationRepository.findById(id);
         if (invitation.isEmpty()) {
 
             return new QResult<Invitation>(null, StateEnum.ERROR.getState());
         } else {
-            invitationRepository.save(invitation.get().like(user.getId()));
+            invitationRepository.save(invitation.get().like(userId));
             return new QResult<Invitation>(invitation.get(), StateEnum.SUCCESS.getState());
         }
     }
 
     @Override
-    public QResult<Invitation> unlike(BigInteger id, User user) {
+    public QResult<Invitation> unlike(BigInteger id, BigInteger userId) {
         Optional<Invitation> invitation = invitationRepository.findById(id);
         if (invitation.isEmpty()) {
 
             return new QResult<Invitation>(null, StateEnum.ERROR.getState());
         } else {
-            invitationRepository.save(invitation.get().unlike(user.getId()));
+            invitationRepository.save(invitation.get().unlike(userId));
             return new QResult<Invitation>(invitation.get(), StateEnum.SUCCESS.getState());
         }
     }
 
     @Override
-    public QResult<Invitation> join(BigInteger id, User user) {
+    public QResult<Invitation> join(BigInteger id,BigInteger userId) {
         Optional<Invitation> invitation = invitationRepository.findById(id);
         if (invitation.isEmpty()) {
 
             return new QResult<Invitation>(null, StateEnum.ERROR.getState());
         } else {
-            invitationRepository.save(invitation.get().addFollower(user));
+            Optional<User> user = userRepository.findById(userId);
+            invitationRepository.save(invitation.get().addFollower(user.get()));
             return new QResult<Invitation>(invitation.get(), StateEnum.SUCCESS.getState());
         }
     }
 
     @Override
-    public QResult<Invitation> disjoint(BigInteger id, User user) {
+    public QResult<Invitation> disjoint(BigInteger id,BigInteger userId) {
         Optional<Invitation> invitation = invitationRepository.findById(id);
         if (invitation.isEmpty()) {
 
             return new QResult<Invitation>(null, StateEnum.ERROR.getState());
         } else {
-            invitationRepository.save(invitation.get().minusFollower(user));
+            Optional<User> user = userRepository.findById(userId);
+            invitationRepository.save(invitation.get().minusFollower(user.get()));
             return new QResult<Invitation>(invitation.get(), StateEnum.SUCCESS.getState());
         }
     }
