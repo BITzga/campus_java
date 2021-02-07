@@ -32,7 +32,7 @@ public class JwtUtils {
 
     private static final String USER_INFO_KEY = "user_info";
 
-    private static final long TOKEN_EXPIRED_SECOND = 600;
+    private static final long TOKEN_EXPIRED_SECOND = 60000;
 
 
 
