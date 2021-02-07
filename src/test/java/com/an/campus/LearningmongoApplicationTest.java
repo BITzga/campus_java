@@ -79,8 +79,8 @@ class LearningmongoApplicationTest {
 //        }
 //        System.out.println(topics);
 //        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000000)));
-//        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000001)));
-        uRepo.save(new User(BigInteger.valueOf(1111),"pwd"));
-        uRepo.save(new User(BigInteger.valueOf(1112),"123"));
+////        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000001)));
+//        uRepo.save(new User(BigInteger.valueOf(1111),"pwd"));
+//        uRepo.save(new User(BigInteger.valueOf(1112),"123"));
     }
 }
