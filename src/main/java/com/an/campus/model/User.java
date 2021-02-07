@@ -3,20 +3,32 @@ package com.an.campus.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 
 @Document
 public class User {
+    @NotNull
     @Id
     private BigInteger id;
     private String username;
+    @NotNull
     private String pwd;
     private String gender;
     private String email;
     private String headImgUrl;
 
+    public User(BigInteger id, String pwd) {
+        this.id = id;
+        this.pwd = pwd;
+    }
+
+    public User(String username, @NotNull String pwd) {
+        this.username = username;
+        this.pwd = pwd;
+    }
 
     @Override
     public boolean equals(Object o) {

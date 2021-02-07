@@ -12,6 +12,7 @@ import com.an.campus.repository.InvitationRepository;
 import com.an.campus.repository.TopicRepository;
 import com.an.campus.repository.UserRepository;
 import com.an.campus.service.UserService;
+import com.an.campus.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -37,7 +38,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     FollowingRepository followingRepository;
 
-
+    @Autowired
+    JwtUtils jwtUtils;
     private synchronized BigInteger getNewID(){
         ID=ID.add(BigInteger.valueOf(1));
         return ID;
@@ -97,5 +99,14 @@ public class UserServiceImpl implements UserService {
             Page<Invitation> page = new PageImpl<>(invitations,pageable,invitations.size());
             return new PageResult<>(page,StateEnum.SUCCESS.getState(), pageable);
         }
+    }
+
+    @Override
+    public QResult<Object> login(BigInteger userId,String psw) {
+
+        if(userRepository.findById(userId).get().getPwd().equals(psw))
+            return new QResult<>(jwtUtils.generateToken(userId),StateEnum.SUCCESS.getState());
+        return new QResult<>(null,StateEnum.ERROR.getState());
+
     }
 }

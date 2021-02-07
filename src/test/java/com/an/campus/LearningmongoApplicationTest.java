@@ -2,6 +2,7 @@ package com.an.campus;
 
 import com.an.campus.model.Comment;
 import com.an.campus.model.Topic;
+import com.an.campus.model.User;
 import com.an.campus.repository.FollowerRepository;
 import com.an.campus.repository.InvitationRepository;
 import com.an.campus.repository.TopicRepository;
@@ -70,15 +71,16 @@ class LearningmongoApplicationTest {
     }
     @Test
     void testRepo(){
-        var topics = new ArrayList<Topic>();
-        for(int i=0;i<10;i++){
-            var topic = createTopic(i);
-            topics.add(topic);
-            topicRepository.save(topic);
-        }
-        System.out.println(topics);
-        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000000)));
-        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000001)));
-
+//        var topics = new ArrayList<Topic>();
+//        for(int i=0;i<10;i++){
+//            var topic = createTopic(i);
+//            topics.add(topic);
+//            topicRepository.save(topic);
+//        }
+//        System.out.println(topics);
+//        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000000)));
+//        System.out.println(topicRepository.findById(BigInteger.valueOf(1000000001)));
+        uRepo.save(new User(BigInteger.valueOf(1111),"pwd"));
+        uRepo.save(new User(BigInteger.valueOf(1112),"123"));
     }
 }

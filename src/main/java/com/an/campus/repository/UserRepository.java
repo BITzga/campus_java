@@ -7,7 +7,7 @@ import java.math.BigInteger;
 import java.util.Optional;
 
 public interface UserRepository extends MongoRepository<User,BigInteger> {
-    Optional<User> findById(User user);
+    Optional<User> findById(BigInteger id);
     User save(User user);
 
 

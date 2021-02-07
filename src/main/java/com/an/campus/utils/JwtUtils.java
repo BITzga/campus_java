@@ -1,26 +1,28 @@
 package com.an.campus.utils;
 import com.an.campus.model.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.jackson.io.JacksonDeserializer;
 import io.jsonwebtoken.lang.Maps;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/token")
-public class TokenController {
+public class JwtUtils {
     /**
      * SECRET 是签名密钥，只生成一次即可，生成方法：
      * Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -32,18 +34,13 @@ public class TokenController {
 
     private static final long TOKEN_EXPIRED_SECOND = 60;
 
-    @Autowired
-    private HttpServletRequest request;
 
-    @RequestMapping("/get")
-    public Object get() {
+
+    public String  generateToken(BigInteger id) {
 
         Map<String, Object> claims = new HashMap<>();
-        User userInfo = new User();
-        userInfo.setPwd("123456");
-        userInfo.setUsername("测试abc123");
-        claims.put(USER_INFO_KEY, userInfo);
-
+        claims.put("uid", "123456");
+        claims.put("user_name", "admin");
         // 添加自定义参数
         JwtBuilder jwtBuilder = Jwts.builder()
                 .setClaims(claims);
@@ -59,24 +56,27 @@ public class TokenController {
         return jwsStr;
     }
 
-    @RequestMapping("/verify")
-    public Object verify() {
-        String token = request.getHeader("Authorization");
 
+    public Claims verify(String token) throws UnsupportedEncodingException {
+
+//        String token = userAgent;
+        System.out.println(token);
         SecretKey secretKey = getSecretKey();
-        Jws<Claims> jws = Jwts.parserBuilder()
-                // 解析 JWT 的服务器与创建 JWT 的服务器的时钟不一定完全同步，此设置允许两台服务器最多有 3 分钟的时差
-                .setAllowedClockSkewSeconds(180L)
-                .setSigningKey(secretKey)
-                // 默认情况下 JJWT 只能解析 String, Date, Long, Integer, Short and Byte 类型，如果需要解析其他类型则需要配置 JacksonDeserializer
-                .deserializeJsonWith(new JacksonDeserializer(Maps.of(USER_INFO_KEY, User.class).build()))
-                .build().parseClaimsJws(token);
 
-        Claims claims = jws.getBody();
+        try{
+            Jws<Claims> jws = Jwts.parserBuilder()
+                    .setAllowedClockSkewSeconds(180L)
+                    .setSigningKey(secretKey)
+                    // 默认情况下 JJWT 只能解析 String, Date, Long, Integer, Short and Byte 类型，如果需要解析其他类型则需要配置 JacksonDeserializer
 
-        User userInfo = claims.get(USER_INFO_KEY, User.class);
-
-        return userInfo;
+                    .build().parseClaimsJws(token);
+                    Claims claims = jws.getBody();
+                    return claims;
+        } catch (JwtException e) {
+            e.printStackTrace();
+            return null;
+            //don't trust the JWT!
+        }
     }
 
     /**
@@ -89,4 +89,8 @@ public class TokenController {
         byte[] encodeKey = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(encodeKey);
     }
+    public boolean isTokenExpired(Date expiration){
+        return expiration.before(new Date());
+    }
+
 }

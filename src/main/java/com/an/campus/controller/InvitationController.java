@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(produces = "application/json")
+@RequestMapping
 public class InvitationController {
     @Autowired
     InvitationService invitationService;

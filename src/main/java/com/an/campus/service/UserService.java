@@ -16,5 +16,5 @@ public interface UserService {
     PageResult<Page<Topic>> getTopics(BigInteger userId, Pageable pageable);
     PageResult<Page<Invitation>> getInvitations(BigInteger userId, Pageable pageable);
     PageResult<Page<Invitation>> getJoinedInvitations(BigInteger userId, Pageable pageable);
-
+    QResult<Object> login(BigInteger userId,String psw);
 }
