@@ -8,6 +8,7 @@ import com.an.campus.model.Topic;
 import com.an.campus.model.User;
 import com.an.campus.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -66,7 +67,7 @@ public class TopicController {
         }
 
     }
-    @PostMapping("/topic/{id}/unlike")
+    @DeleteMapping("/topic/{id}/like")
     public QResult<Topic> unlikeTopic(@PathVariable BigInteger id, BigInteger userId){
 
         if(topicService.unlikeTopic(id,userId))
