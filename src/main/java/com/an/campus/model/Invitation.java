@@ -50,9 +50,13 @@ public class Invitation {
     public String findCommentOwner(BigInteger commendId,BigInteger replyToId){
         for(var comment:comments){
             if(comment.getCommentId().equals(commendId)){
-                for (var subCommend:comment.getSubComments()){
-                    if(subCommend.getUserId().equals(replyToId))
-                        return subCommend.getUsername();
+                if(comment.getUserId().equals(replyToId)){
+                    return comment.getUsername();
+                }else{
+                    for(var subComment:comment.getSubComments()){
+                        if(subComment.getUserId().equals(replyToId))
+                            return subComment.getUsername();
+                    }
                 }
             }
         }
@@ -110,7 +114,7 @@ public class Invitation {
             comments = new ArrayList<>();
         for (int i=0;i< comments.size();i++){
             if(comments.get(i).getCommentId().equals(commentId)){
-                comments.get(i).addComment(newComment);
+                    comments.get(i).addComment(newComment);
             }
         }
         return this;

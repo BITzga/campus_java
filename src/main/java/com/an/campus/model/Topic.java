@@ -40,11 +40,16 @@ public class Topic {
     private List<BigInteger> likeList;
     public  String findCommentOwner(BigInteger commendId,BigInteger replyToId){
         for(var comment:comments){
-            if(comment.getCommentId().equals(commendId))
-                for(var subCommend:comment.getSubComments()){
-                    if(subCommend.getUserId().equals(replyToId))
-                        return subCommend.getUsername();
+            if(comment.getCommentId().equals(commendId)){
+                if(comment.getUserId().equals(replyToId)){
+                    return comment.getUsername();
+                }else{
+                    for(var subComment:comment.getSubComments()){
+                        if(subComment.getUserId().equals(replyToId))
+                            return subComment.getUsername();
+                    }
                 }
+            }
         }
         return "";
     }
@@ -80,7 +85,7 @@ public class Topic {
             if(comments==null)
                 comments = new ArrayList<>();
             for (var comment : comments) {
-                if (comment.getCommentId() == commentId) {
+                if (comment.getCommentId().equals(commentId)) {
                     comment.addComment(newComment);
                 }
             }

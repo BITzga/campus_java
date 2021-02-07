@@ -137,6 +137,8 @@ public class Comment {
     }
 
     public List<Comment> getSubComments() {
+        if(subComments==null)
+            subComments =new ArrayList<>();
         return subComments;
     }
 
