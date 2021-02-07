@@ -128,6 +128,8 @@ public class InvitationServiceImpl implements InvitationService {
             return new QResult<>(comment,StateEnum.ERROR.getState());
         }else {
             Optional<User> user =userRepository.findById(comment.getUserId());
+            comment.setReplyToName(detail.get().getOwnerName());
+            comment.setReplyToHead(detail.get().getHeadImg());
             comment.setCommentId(getNewID());
             comment.setBelongId(id);
             comment.setUsername(user.get().getUsername());
@@ -141,10 +143,11 @@ public class InvitationServiceImpl implements InvitationService {
     @Override
     public QResult<Comment> subComment(BigInteger id, BigInteger commendId, Comment comment) {
         Optional<Invitation> detail = invitationRepository.findById(id);
-        if(detail.isEmpty())
+        if(detail.isEmpty()||!detail.get().commentIsEmpty(commendId))
             return new QResult<>(comment,StateEnum.ERROR.getState());
         else {
             Optional<User> user =userRepository.findById(comment.getUserId());
+            comment.setReplyToName(detail.get().findCommentOwner(commendId));
             comment.setCommentId(getNewID());
             comment.setBelongId(commendId);
             comment.setUsername(user.get().getUsername());

@@ -38,6 +38,7 @@ public class TopicServiceImpl implements TopicService {
         else {
             Optional<User> user =userRepository.findById(newComment.getUserId());
             newComment.setCommentId(getNewID());
+            newComment.setReplyToName(topic.get().getUsername());
             newComment.setBelongId(topicId);
             newComment.setUsername(user.get().getUsername());
             newComment.setHeadImg(user.get().getHeadImgUrl());
@@ -51,12 +52,13 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public boolean comment(BigInteger topicId, BigInteger commentId,Comment newComment) {
         Optional<Topic> topic = topicRepository.findById(topicId);
-        if(topic.isEmpty())
+        if(topic.isEmpty()||topic.get().commentIsEmpty(commentId))
             return false;
         else {
             Optional<User> user =userRepository.findById(newComment.getUserId());
             newComment.setCommentId(getNewID());
             newComment.setBelongId(commentId);
+            newComment.setReplyToName(topic.get().findOwnerName(commentId));
             newComment.setUsername(user.get().getUsername());
             newComment.setHeadImg(user.get().getHeadImgUrl());
             newComment.setLikes(0);

@@ -47,7 +47,14 @@ public class Invitation {
     @Valid
     private Activity activity;
 
-
+    public String findCommentOwner(BigInteger id){
+        for(var comment:comments){
+            if(comment.getUserId().equals(id)){
+                return comment.getHeadImg();
+            }
+        }
+        return "";
+    }
     public synchronized Invitation like(BigInteger userId){
         if(likes==null)
             likes=0;
@@ -81,12 +88,13 @@ public class Invitation {
         return this;
     }
     public synchronized boolean commentIsEmpty(BigInteger commentId){
+
         for (int i=0;i< comments.size();i++){
-            if(comments.get(i).getCommentId()==commentId){
-                return false;
+            if(comments.get(i).getCommentId().equals(commentId)){
+                return true;
             }
         }
-        return true;
+        return false;
     }
     public synchronized Invitation addComment(Comment comment){
         if(comments==null)
@@ -98,7 +106,7 @@ public class Invitation {
         if(comments==null)
             comments = new ArrayList<>();
         for (int i=0;i< comments.size();i++){
-            if(comments.get(i).getCommentId()==commentId){
+            if(comments.get(i).getCommentId().equals(commentId)){
                 comments.get(i).addComment(newComment);
             }
         }

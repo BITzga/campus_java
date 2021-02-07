@@ -38,7 +38,13 @@ public class Topic {
     private Date sendDate;
     @Null
     private List<BigInteger> likeList;
-
+    public String findOwnerName(BigInteger commandID){
+        for(var comment:comments){
+            if(comment.getUserId().equals(commandID))
+                return comment.getUsername();
+        }
+        return "";
+    }
     public Topic(BigInteger id, BigInteger ownerId, List<String> imgUrl, List<Comment> comments, String title, String context, Integer views, Integer likes, Date sendDate, List<BigInteger> likeList) {
         this.id = id;
         this.ownerId = ownerId;
@@ -51,7 +57,14 @@ public class Topic {
         this.sendDate = sendDate;
         this.likeList = likeList;
     }
-
+    public synchronized boolean commentIsEmpty(BigInteger commentId){
+        for (int i=0;i< comments.size();i++){
+            if(comments.get(i).getCommentId().equals(commentId)){
+                return false;
+            }
+        }
+        return true;
+    }
     public void addComment(Comment comment){
         synchronized (this) {
             if(comments==null)

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class Comment {
     private BigInteger belongId;
     @NotNull
     private BigInteger replyToId;
+    private String replyToName;
+    private String replyToHead;
     @NotNull
     private BigInteger userId;
     private String username;
@@ -40,8 +43,25 @@ public class Comment {
     }
 
 
+    public String getReplyToName() {
+        return replyToName;
+    }
+
+    public void setReplyToName(String replyToName) {
+        this.replyToName = replyToName;
+    }
+
+    public String getReplyToHead() {
+        return replyToHead;
+    }
+
+    public void setReplyToHead(String replyToHead) {
+        this.replyToHead = replyToHead;
+    }
 
     public synchronized void addComment(Comment comment){
+        if(this.subComments==null)
+            this.subComments=new ArrayList<>();
         this.subComments.add(comment);
     }
     public BigInteger getCommentId() {
