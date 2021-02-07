@@ -30,11 +30,6 @@ public class User {
         this.headImgUrl = headImgUrl;
     }
 
-    public User(BigInteger id, String pwd) {
-        this.id = id;
-        this.pwd = pwd;
-    }
-
 
     @Override
     public boolean equals(Object o) {
