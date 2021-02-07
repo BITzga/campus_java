@@ -47,10 +47,13 @@ public class Invitation {
     @Valid
     private Activity activity;
 
-    public String findCommentOwner(BigInteger id){
+    public String findCommentOwner(BigInteger commendId,BigInteger replyToId){
         for(var comment:comments){
-            if(comment.getUserId().equals(id)){
-                return comment.getHeadImg();
+            if(comment.getCommentId().equals(commendId)){
+                for (var subCommend:comment.getSubComments()){
+                    if(subCommend.getUserId().equals(replyToId))
+                        return subCommend.getUsername();
+                }
             }
         }
         return "";

@@ -147,7 +147,7 @@ public class InvitationServiceImpl implements InvitationService {
             return new QResult<>(comment,StateEnum.ERROR.getState());
         else {
             Optional<User> user =userRepository.findById(comment.getUserId());
-            comment.setReplyToName(detail.get().findCommentOwner(commendId));
+            comment.setReplyToName(detail.get().findCommentOwner(commendId,comment.getReplyToId()));
             comment.setCommentId(getNewID());
             comment.setBelongId(commendId);
             comment.setUsername(user.get().getUsername());

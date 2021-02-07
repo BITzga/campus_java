@@ -58,7 +58,7 @@ public class TopicServiceImpl implements TopicService {
             Optional<User> user =userRepository.findById(newComment.getUserId());
             newComment.setCommentId(getNewID());
             newComment.setBelongId(commentId);
-            newComment.setReplyToName(topic.get().findOwnerName(commentId));
+            newComment.setReplyToName(topic.get().findCommentOwner(commentId,newComment.getReplyToId()));
             newComment.setUsername(user.get().getUsername());
             newComment.setHeadImg(user.get().getHeadImgUrl());
             newComment.setLikes(0);

@@ -38,10 +38,13 @@ public class Topic {
     private Date sendDate;
     @Null
     private List<BigInteger> likeList;
-    public String findOwnerName(BigInteger commandID){
+    public  String findCommentOwner(BigInteger commendId,BigInteger replyToId){
         for(var comment:comments){
-            if(comment.getUserId().equals(commandID))
-                return comment.getUsername();
+            if(comment.getCommentId().equals(commendId))
+                for(var subCommend:comment.getSubComments()){
+                    if(subCommend.getUserId().equals(replyToId))
+                        return subCommend.getUsername();
+                }
         }
         return "";
     }
