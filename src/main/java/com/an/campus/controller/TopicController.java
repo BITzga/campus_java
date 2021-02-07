@@ -57,9 +57,9 @@ public class TopicController {
         }
     }
     @PostMapping("/topic/{id}/like")
-    public QResult<Topic> likeTopic(@PathVariable BigInteger id, @RequestBody User user){
+    public QResult<Topic> likeTopic(@PathVariable BigInteger id, BigInteger userId){
 
-        if(topicService.likeTopic(id,user.getId()))
+        if(topicService.likeTopic(id,userId))
             return new QResult<Topic>(null,StateEnum.SUCCESS.getState());
         else{
             return new QResult<Topic>(null,StateEnum.ERROR.getState());
@@ -67,9 +67,9 @@ public class TopicController {
 
     }
     @PostMapping("/topic/{id}/unlike")
-    public QResult<Topic> unlikeTopic(@PathVariable BigInteger id, @RequestBody User user){
+    public QResult<Topic> unlikeTopic(@PathVariable BigInteger id, BigInteger userId){
 
-        if(topicService.unlikeTopic(id,user.getId()))
+        if(topicService.unlikeTopic(id,userId))
             return new QResult<Topic>(null,StateEnum.SUCCESS.getState());
         else{
             return new QResult<Topic>(null,StateEnum.ERROR.getState());
