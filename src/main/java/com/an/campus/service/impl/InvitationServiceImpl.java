@@ -29,7 +29,7 @@ public class InvitationServiceImpl implements InvitationService {
     UserRepository userRepository;
     @Autowired
     FollowingRepository followingRepository;
-    private static BigInteger ID=BigInteger.valueOf(10000);
+    private static BigInteger ID=BigInteger.valueOf(10500);
 
     private synchronized BigInteger getNewID(){
         ID=ID.add(BigInteger.valueOf(1));

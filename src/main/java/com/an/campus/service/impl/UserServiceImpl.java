@@ -28,7 +28,7 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static BigInteger ID=BigInteger.valueOf(10000);
+    private static BigInteger USER_ID=BigInteger.valueOf(100000);
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JwtUtils jwtUtils;
     private synchronized BigInteger getNewID(){
-        ID=ID.add(BigInteger.valueOf(1));
-        return ID;
+        USER_ID=USER_ID.add(BigInteger.valueOf(1));
+        return USER_ID;
     }
     @Override
     public QResult<User> getUserInfo(BigInteger id) {
@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public synchronized QResult<User> createUser(User user) {
+        System.out.println(getNewID());
         User newUser = userRepository.save(user.setDefaultId(getNewID()));
         if(newUser==null)
             return new QResult<User>(null, StateEnum.ERROR.getState());
@@ -90,7 +91,7 @@ public class UserServiceImpl implements UserService {
     public PageResult<Page<Invitation>> getJoinedInvitations(BigInteger userId, Pageable pageable) {
         Optional<Followings> followings = followingRepository.findById(userId);
         if(followings.isEmpty())
-            return new PageResult<>(null, StateEnum.ERROR.getState(),pageable);
+            return new PageResult<>(new PageImpl<>(new ArrayList<Invitation>(),pageable,0), StateEnum.ERROR.getState(),pageable);
         else {
             List<Invitation> invitations = new ArrayList<>();
             for(var inviteID:followings.get().getFollowings()){

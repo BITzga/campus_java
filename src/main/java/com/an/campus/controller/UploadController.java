@@ -2,6 +2,7 @@ package com.an.campus.controller;
 
 import com.an.campus.constants.StateEnum;
 import com.an.campus.dto.UploadResult;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,9 +35,10 @@ public class UploadController {
 
         String fileName = file.getOriginalFilename();
 
-        File dest = new File(headImgFilePath + fileName);
+        //File dest = new File(headImgFilePath + fileName);
         try {
-            file.transferTo(dest);
+            Thumbnails.of(file.getInputStream()).size(27,27).toFile(headImgFilePath+fileName);
+
         } catch (Exception e) {
             e.printStackTrace();
             return new UploadResult(StateEnum.ERROR.getState(), null);

@@ -24,7 +24,7 @@ public class TopicServiceImpl implements TopicService {
     TopicRepository topicRepository;
     @Autowired
     UserRepository userRepository;
-    private static BigInteger ID=BigInteger.valueOf(10000);
+    private static BigInteger ID=BigInteger.valueOf(10300);
 
     private synchronized BigInteger getNewID(){
         ID=ID.add(BigInteger.valueOf(1));

@@ -67,9 +67,9 @@ public class UserController {
     }
 
     @PostMapping("/sign")
-    public QResult<Object> sign(@RequestBody @Validated User user){
-        user.setId(getNewID());
-        return new QResult<>(userRepository.save(user), StateEnum.SUCCESS.getState());
+    public QResult<User> sign(@RequestBody @Validated User user){
+        //user.setId(getNewID());
+        return  userService.createUser(user);
     }
 
     /*
