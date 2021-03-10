@@ -14,14 +14,17 @@
 使用Vue、Vuex、Router、axios、Element-UI完成Web前端开发<br />
 
 ## 功能演示：
-### 安卓端：
-
-![img_4.png](img_4.png)<br />
-
 ### Web端:
 广场界面，显示运动邀请<br />
-![img_2.png](img_2.png)<br />
+![img_2.png](introduction_img/img_2.png)<br />
 校友圈界面，分享生活<br />
-![img_1.png](img_1.png)<br />
+![img_1.png](introduction_img/img_1.png)<br />
 支持二级评论、点赞<br />
-![img_3.png](img_3.png)<br /> 
+![img_3.png](introduction_img/img_3.png)<br />
+### 安卓端：
+邀请详情界面，用户加入邀请后，可在“我“界面看到已加入邀请<br />
+![img_5.png](introduction_img/img_5.png)<br />
+其他功能演示<br />
+![img_4.png](introduction_img/img_4.png)<br />
+
+
