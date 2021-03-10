@@ -1,9 +1,9 @@
 # 青春校园
 ## 项目介绍:
 以运动爱好为主题的大学生校园交友平台。
-####后端：https://github.com/BITzga/campus_java
-####Web端：https://github.com/BITzga/campus
-####Android端：https://github.com/zsybh1/hobbyfriends
+#### 后端：https://github.com/BITzga/campus_java
+#### Web端：https://github.com/BITzga/campus
+#### Android端：https://github.com/zsybh1/hobbyfriends
 用户通过Web端/App发布运动邀请信息，其他用户参与邀请、线下参与活动达到交友的目的
 具有类似朋友圈的“校友圈“功能
 ![img.png](introduction_img/img.png)
