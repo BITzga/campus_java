@@ -14,7 +14,7 @@
 使用Spring Data MongoDB完成用户信息、活动邀请、校友圈帖子的存取<br />
 使用手写的LRU Cache完成热点帖子/邀请的缓存<br />
 使用Vue、Vuex、Router、axios、Element-UI完成Web前端开发<br />
-
+使用JWT+Spring的Interceptor对特定访问路径下未登录的用户进行拦截
 ## 功能演示：
 ### Web端:
 广场界面，显示运动邀请<br />
