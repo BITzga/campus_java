@@ -26,7 +26,7 @@ Android端
 注册功能
 ![img_4.png](img_4.png)
 ![img_5.png](img_5.png)
-Web端：
+Web端： 
 ![img_13.png](img_13.png)
 ![img_10.png](img_10.png)
 ![img_11.png](img_11.png)
