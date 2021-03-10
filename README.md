@@ -19,6 +19,9 @@
 ![img_4.png](img_4.png)<br />
 
 ### Web端:
+广场界面，显示运动邀请<br />
 ![img_2.png](img_2.png)<br />
+校友圈界面，分享生活<br />
 ![img_1.png](img_1.png)<br />
+支持二级评论、点赞<br />
 ![img_3.png](img_3.png)<br /> 
